@@ -1,0 +1,31 @@
+# include <cstdio>
+# include <cstring>
+# include <iostream>
+# include <cctype>
+
+using namespace std;
+
+int lineage[1000005];
+
+string nm[10000005];
+
+int num;
+
+int main()
+{
+    memset(lineage, 0, sizeof(lineage));
+    cin >> num;
+    for (int i = 1; i <= num; ++ i)
+    {
+        string x;
+        cin >> x;
+        int a, b, c;
+        cin >> a >> b >> c;
+        lineage[i] += a * 3 + b * 2 + c;
+        nm[lineage[i]] = x;
+    }
+    sort(lineage + 1, lineage + num + 1);
+    cout << nm[lineage[num]] << endl;
+    cout << nm[lineage[num - 1]] << endl;
+    return 0;
+}
