@@ -1,0 +1,27 @@
+# include <iostream>
+# include <cstring>
+# include <cstdio>
+# include <cctype>
+
+using namespace std;
+
+int nm;
+
+int cnt;
+
+int main()
+{
+    cin >> nm;
+    for (int i = 1; i <= nm - 3; ++ i)
+    {
+        for (int j = i + 1; j <= nm - 2; ++ j)
+        {
+            for (int k = j + 1; k <= nm - 1; ++ k)
+            {
+                ++ cnt;
+            }
+        }
+    }
+    cout << cnt;
+    return 0;
+}
