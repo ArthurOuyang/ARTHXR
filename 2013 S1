@@ -1,0 +1,33 @@
+# include <cstdio>
+# include <iostream>
+
+using namespace std;
+
+int nm;
+
+bool find(int strt)
+{
+    int x[10];
+    memset(x, 0, sizeof(x));
+    while (strt > 0)
+    {
+        ++ x[strt % 10];
+        if (x[strt % 10] > 1) return false;
+        strt /= 10;
+    }
+    return true;
+}
+
+int main()
+{
+    cin >> nm;
+    for (int i = nm;;++ i)
+    {
+        if (find(i))
+        {
+            cout << i;
+            break;
+        }
+    }
+    return 0;
+}
