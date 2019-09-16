@@ -1,0 +1,62 @@
+# include <cstdio>
+# include <iostream>
+# include <cstring>
+# define MAX 10005
+
+using namespace std;
+
+string x[MAX];
+
+string y[MAX];
+
+bool judge = true;
+
+int num;
+
+int main()
+{
+    cin >> num;
+    for (int i = 1; i <= num; ++ i)
+    {
+        string a;
+        cin >> a;
+        x[i] = a;
+    }
+    for (int i = 1; i <= num; ++ i)
+    {
+        string b;
+        cin >> b;
+        y[i] = b;
+        if (!x[i].compare(y[i]))
+        {
+            judge = false;
+            break;
+        }
+    }
+    for (int i = 1; i <= num - 1; ++ i)
+    {
+        if (!judge) break;
+        for (int j = i + 1; j <= num; ++ j)
+        {
+            if (!x[i].compare(x[j]))
+            {
+                if (y[i].compare(y[j]))
+                {
+                    judge = false;
+                    break;
+                }
+            }
+            if (!x[i].compare(y[j]))
+            {
+                if (y[i].compare(x[j]))
+                {
+                    judge = false;
+                    break;
+                }
+            }
+        }
+    }
+    if (!judge) cout << "bad" << endl;
+    else cout << "good" << endl;
+    return 0;
+}
