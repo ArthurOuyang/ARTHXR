@@ -1,0 +1,30 @@
+# include <vector>
+# include <iostream>
+# include <cstdio>
+
+using namespace std;
+
+vector<int> x;
+
+int num;
+
+int sum = 0;
+
+int main()
+{
+    cin >> num;
+    for (int i = 1; i <= num; ++ i)
+    {
+        int input;
+        cin >> input;
+        if (input != 0) x.push_back(input);
+        else x.pop_back();
+    }
+    if (x.size() != 0)
+    {
+        for (int i = 0; i < x.size(); ++ i) sum += x[i];
+        cout << sum << endl;
+    }
+    else cout << 0 << endl;
+    return 0;
+}
