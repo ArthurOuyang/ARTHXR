@@ -1,0 +1,45 @@
+# include <iostream>
+# include <cstdio>
+# include <cstring>
+
+using namespace std;
+
+string x[10005];
+
+char y[10005];
+
+int num;
+
+string code;
+
+string ans = "";
+
+int main()
+{
+    cin >> num;
+    for (int i = 1; i <= num; ++ i)
+    {
+        char a;
+        string b;
+        cin >> a;
+        cin >> b;
+        x[i] = b;
+        y[i] = a;
+    }
+    cin >> code;
+    while (code.size() != 0)
+    {
+        for (int i = 1; i <= num; ++ i)
+        {
+            if (x[i].compare(code.substr(0, x[i].size())) != 0) continue;
+            else
+            {
+                ans += y[i];
+                code = code.substr(x[i].size());
+                break;
+            }
+        }
+    }
+    cout << ans << endl;
+    return 0;
+}
