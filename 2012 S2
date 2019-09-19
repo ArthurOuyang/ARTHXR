@@ -1,0 +1,33 @@
+# include <cstdio>
+# include <cstring>
+# include <iostream>
+# include <map>
+
+using namespace std;
+
+string AROMATIC_NUMBER;
+
+map<char, int> ROMAN_NUMERAL = {{'I', 1}, {'V', 5}, {'X', 10}, {'L', 50}, {'C', 100}, {'D', 500}, {'M', 1000}};
+
+int sum = 0;
+
+int multipleNum;
+
+int main()
+{
+    cin >> AROMATIC_NUMBER;
+    for (int i = 0; i < AROMATIC_NUMBER.size() - 2; ++ i)
+    {
+        if (i % 2 == 0)
+            multipleNum = AROMATIC_NUMBER[i] - '0';
+        else
+        {
+            if (ROMAN_NUMERAL[AROMATIC_NUMBER[i]] < ROMAN_NUMERAL[AROMATIC_NUMBER[i + 2]])
+                multipleNum -= 2 * multipleNum;
+            sum += multipleNum * ROMAN_NUMERAL[AROMATIC_NUMBER[i]];
+        }
+    }
+    sum += (AROMATIC_NUMBER[AROMATIC_NUMBER.size() - 2] - '0') * ROMAN_NUMERAL[AROMATIC_NUMBER[AROMATIC_NUMBER.size() - 1]];
+    cout << sum << endl;
+    return 0;
+}
