@@ -1,0 +1,27 @@
+# include <iostream>
+# include <cstdio>
+# include <cstring>
+
+using namespace std;
+
+int num;
+
+char x[10005];
+
+int score = 0;
+
+int main()
+{
+    memset(x, 0, sizeof(x));
+    cin >> num;
+    for (int i = 1; i <= num; ++ i)
+        cin >> x[i];
+    for (int i = 1; i <= num; ++ i)
+    {
+        char ans;
+        cin >> ans;
+        if (ans != x[i]) ++ score;
+    }
+    cout << score << endl;
+    return 0;
+}
