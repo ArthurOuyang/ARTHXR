@@ -1,0 +1,36 @@
+# include <iostream>
+# include <cstdio>
+# include <cstring>
+
+using namespace std;
+
+int jerseyNum;
+
+int athNum;
+
+char jersies[100005];
+
+int cnt = 0;
+
+int main()
+{
+    cin >> jerseyNum;
+    cin >> athNum;
+    for (int i = 1; i <= jerseyNum; ++ i)
+        cin >> jersies[i];
+    for (int i = 1; i <= athNum; ++ i)
+    {
+        char athSize;
+        int athWnt;
+        cin >> athSize;
+        cin >> athWnt;
+        if (jersies[athWnt] - 'A' == 0) continue;
+        if (athSize - jersies[athWnt] >= 0)
+        {
+            ++ cnt;
+            jersies[athWnt] = 'A';
+        }
+    }
+    cout << cnt << endl;
+    return 0;
+}
