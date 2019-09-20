@@ -1,0 +1,53 @@
+# include <iostream>
+# include <cstdio>
+# include <cstring>
+# include <vector>
+
+using namespace std;
+
+int MAXIMUM;
+
+int num;
+
+int sum = 0;
+
+int cnt = 4;
+
+vector<int> weigh;
+
+bool judge = true;
+
+int main()
+{
+    cin >> MAXIMUM;
+    cin >> num;
+    for (int i = 1; i <= num; ++ i)
+    {
+        int a;
+        cin >> a;
+        weigh.push_back(a);
+        if (i <= 4)
+        {
+            sum += a;
+            if (sum >= MAXIMUM)
+            {
+                if (i != 4 && sum == MAXIMUM) judge = false;
+                cnt = i;
+                break;
+            }
+        }
+    }
+    if (judge)
+    {
+        while (cnt < num)
+        {
+            sum -= weigh.front();
+            sum += weigh[cnt];
+            if (sum > MAXIMUM) break;
+            ++ cnt;
+            weigh.erase(weigh.begin());
+        }
+    }
+    cout << cnt << endl;
+    return 0;
+}
