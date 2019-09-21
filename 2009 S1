@@ -1,0 +1,36 @@
+# include <cstdio>
+# include <cstring>
+# include <iostream>
+# include <cmath>
+# define MAX 1000005
+
+using namespace std;
+
+int lowerbound;
+
+int upperbound;
+
+int cnt = 0;
+
+bool square[MAX];
+
+bool cube[MAX];
+
+int main()
+{
+    memset(square, false, sizeof(square));
+    memset(cube, false, sizeof(cube));
+    cin >> lowerbound;
+    cin >> upperbound;
+    for (int i = (int)sqrt(lowerbound); i <= (int)sqrt(upperbound) + 1; ++ i)
+        if (i * i - lowerbound >= 0)
+            square[i * i] = true;
+    for (int i = (int)pow(lowerbound, 1.0/3); i <= (int)pow(upperbound, 1.0/3); ++ i)
+        if (i * i * i - lowerbound >= 0)
+            cube[i * i * i] = true;
+    for (int i = lowerbound; i <= upperbound; ++ i)
+        if (square[i] && cube[i])
+            ++ cnt;
+    cout << cnt << endl;
+    return 0;
+}
