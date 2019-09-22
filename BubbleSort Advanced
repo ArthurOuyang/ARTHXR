@@ -1,0 +1,21 @@
+#include <algorithm>
+#include <cstdio>
+
+using namespace std;
+
+int x[100];
+
+void bubbleAdvance(int n)
+{
+    bool y = false;
+    for (int i = n; i > 1; -- i)
+    {
+        for (int j = 1; j < i; ++ j)
+        {
+            if (x[i] < x[j]) swap(x[i], x[j]);
+            y = true;
+        }
+        if (!y) return;
+    }
+    return;
+}
