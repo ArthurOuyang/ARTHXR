@@ -1,0 +1,26 @@
+# include <cstdio>
+# include <cstring>
+# include <iostream>
+# include <algorithm>
+
+using namespace std;
+
+int cnt = 1;
+
+struct city
+{
+    int temp;
+    
+    string name;
+} x[10005];
+
+bool cmp(city a, city b) { return a.temp < b.temp; }
+
+int main()
+{
+    while (cin >> x[cnt].name >> x[cnt].temp)
+        ++ cnt;
+    sort (x + 1, x + cnt, cmp);
+    cout << x[1].name << endl;
+    return 0;
+}
