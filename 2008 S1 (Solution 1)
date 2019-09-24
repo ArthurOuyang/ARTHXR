@@ -1,0 +1,31 @@
+# include <cstdio>
+# include <cstring>
+# include <iostream>
+
+using namespace std;
+
+string x[1000005];
+
+int mn = INT_MAX;
+
+int cnt = 1;
+
+int num;
+
+int rtrn;
+
+int main()
+{
+    while (cin >> x[cnt] >> num)
+    {
+        if (num <= mn)
+        {
+            mn = num;
+            rtrn = cnt;
+        }
+        ++ cnt;
+    }
+        
+    cout << x[rtrn] << endl;
+    return 0;
+}
