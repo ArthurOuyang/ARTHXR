@@ -1,0 +1,43 @@
+# include <iostream>
+# include <cstdio>
+# include <cstring>
+# include <cmath>
+
+using namespace std;
+
+int input = 1;
+
+bool distance(int x, int y)
+{
+    if (input * input < x * x + y * y)
+        return false;
+    return true;
+}
+
+int main()
+{
+    while (input != 0)
+    {
+        cin >> input;
+        int i = input;
+        int j = 1;
+        int cnt = 0;
+        int jdg = true;
+        while (jdg)
+        {
+            if (distance(i, j))
+            {
+                cnt += i;
+                ++ j;
+            }
+            else
+            {
+                -- i;
+                continue;
+            }
+            if (j == input) break;
+        }
+        cout << (cnt + input) * 4 + 1<< endl;
+    }
+    return 0;
+}
