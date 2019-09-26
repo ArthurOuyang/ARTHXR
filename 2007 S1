@@ -1,0 +1,36 @@
+# include <cstdio>
+# include <cstring>
+# include <iostream>
+
+using namespace std;
+
+int num;
+
+int main()
+{
+    cin >> num;
+    for (int i = 1; i <= num; ++ i)
+    {
+        int year;
+        int month;
+        int day;
+        cin >> year >> month >> day;
+        if (2007 - year > 18)
+            cout << "Yes" << endl;
+        else if (2007 - year < 18)
+            cout << "No" << endl;
+        else
+        {
+            if (2 - month > 0)
+                cout << "Yes" << endl;
+            else if (2 - month < 0)
+                cout << "No" << endl;
+            else
+                if (27 - day >= 0)
+                    cout << "Yes" << endl;
+                else
+                    cout << "No" << endl;
+        }
+    }
+    return 0;
+}
