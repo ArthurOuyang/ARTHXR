@@ -1,0 +1,44 @@
+# include <cstdio>
+# include <cstring>
+# include <iostream>
+
+using namespace std;
+
+int gates;
+
+int num;
+
+bool check = true;
+
+int counts[100005];
+
+int cnt = 0;
+
+int main()
+{
+    memset(counts, 0, sizeof(counts));
+    cin >> gates;
+    cin >> num;
+    
+    for (int i = 1; i <= num; ++ i)
+    {
+        int input;
+        cin >> input;
+        for (int i = input; i <= gates; ++ i)
+        {
+            ++ counts[i];
+            if (counts[i] > i)
+            {
+                check = false;
+                break;
+            }
+        }
+        if (!check)
+            break;
+        else
+            ++ cnt;
+    }
+    
+    cout << cnt << endl;
+    return 0;
+}
