@@ -1,0 +1,63 @@
+# include <cstdio>
+# include <cstring>
+# include <iostream>
+
+using namespace std;
+
+int num;
+
+int row;
+
+int col;
+
+int maze[1005][1005];
+
+bool judge[1005][1005];
+
+int main()
+{
+    memset(maze, 0, sizeof(maze));
+    memset(judge, 1, sizeof(judge));
+    cin >> row >> col;
+    cin >> num;
+    
+    for (int i = 1; i <= num; ++ i)
+    {
+        int rw;
+        int cl;
+        
+        cin >> rw >> cl;
+        
+        judge[rw][cl] = false;
+    }
+    
+    for (int i = 1; i <= row; ++ i)
+    {
+        if (!judge[i][1])
+            break;
+        maze[i][1] = 1;
+    }
+    
+    for (int i = 1; i <= col; ++ i)
+    {
+        if (!judge[1][i])
+            break;
+        maze[1][i] = 1;
+    }
+    
+    for (int i = 2; i <= row; ++ i)
+        for (int j = 2; j <= col; ++ j)
+        {
+            if (judge[i][j])
+            {
+                if (judge[i - 1][j])
+                    maze[i][j] += maze[i - 1][j];
+                if (judge[i][j - 1])
+                    maze[i][j] += maze[i][j - 1];
+            }
+        }
+    
+    cout << maze[row][col] << endl;
+            
+    return 0;
+}
