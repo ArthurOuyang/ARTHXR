@@ -1,0 +1,63 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <cmath>
+#include <cstring>
+
+using namespace std;
+
+int x[100005], y[100005], z[200010];
+
+string a, b;
+
+bool check = false;
+
+void carry()
+{
+    int len = x[0] + y[0] + 1;
+    for (int i = 1; i <= len; ++ i)
+    {
+        z[i + 1] += z[i] / 10;
+        z[i] %= 10;
+    }
+    for (int i = len; i >= 1; -- i)
+    {
+        if (z[i] != 0 || i == 1) check = true;
+        if (check) printf("%d", z[i]);
+    }
+    return;
+}
+
+void recur(int sc, int ec, int sp, int ep)
+{
+    if (sc == sp)
+    {
+        for (int i = 1; i <= ec - ep + 1; ++ i) z[sp + ep - 2 + i] += y[ep + i - 1] * x[sp];
+        return;
+    }
+    else if (ec == ep)
+    {
+        for (int i = 1; i <= sc - sp + 1; ++ i) z[sp + ep - 2 + i] += x[sp + i - 1] * y[ep];
+        return;
+    }
+    recur(sc, ec, (sc + sp - 1) / 2 + 1, (ec + ep - 1) / 2 + 1);
+    recur((sc + sp - 1) / 2, (ec + ep - 1) / 2, sp, ep);
+    recur(sc, (ec + ep - 1) / 2, (sc + sp - 1) / 2 + 1, ep);
+    recur((sc + sp - 1) / 2, ec, sp, (ec + ep - 1) / 2 + 1);
+    return;
+}
+
+int main()
+{
+    cin >> a >> b;
+    memset(x, 0, sizeof(x));
+    memset(y, 0, sizeof(y));
+    memset(z, 0, sizeof(z));
+    x[0] = a.length();
+    y[0] = b.length();
+    for (int i = 1; i <= x[0]; ++ i) x[i] = a[x[0] - i] - '0';
+    for (int i = 1; i <= y[0]; ++ i) y[i] = b[y[0] - i] - '0';
+    recur(x[0], y[0], 1, 1);
+    carry();
+    return 0;
+}
