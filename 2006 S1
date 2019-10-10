@@ -1,0 +1,62 @@
+# include <cstdio>
+# include <cstring>
+# include <iostream>
+
+using namespace std;
+
+string dad;
+
+string mom;
+
+int num;
+
+int store[10005];
+
+int father[10005];
+
+int mother[10005];
+
+int main()
+{
+    memset(store, 0, sizeof(store));
+    memset(father, 0, sizeof(father));
+    memset(mother, 0, sizeof(mother));
+    cin >> dad;
+    cin >> mom;
+    cin >> num;
+    
+    for (int i = 0; i < dad.length(); ++ i)
+        father[dad[i]] = 1;
+    
+    for (int i = 0; i < mom.length(); ++ i)
+        mother[mom[i]] = 1;
+    
+    for (int i = 1; i <= dad.length() / 2; ++ i)
+    {
+        if (father[i + 96] && mother[i + 96])
+            store[i + 96] = 1;
+    
+        if (father[i + 64] || mother[i + 64])
+            store[i + 64] = 1;
+    }
+            
+    
+    for (int i = 1; i <= num; ++ i)
+    {
+        string babe;
+        cin >> babe;
+        for (int i = 0; i < babe.length(); ++ i)
+        {
+            if (store[babe[i]] == 0)
+            {
+                cout << "Not their baby!" << endl;
+                break;
+            }
+            
+            if (i == babe.length() - 1)
+                cout << "Possible baby" << endl;
+        }
+    }
+    
+    return 0;
+}
