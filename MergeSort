@@ -1,0 +1,185 @@
+# includ <cstdio>
+# include <iostream>
+# include <algorithm>
+
+# define MAX 10000000
+
+using namespace std;
+
+int x[MAX], y[MAX], n, z[MAX], m = MAX, len;
+
+bool judge = false;
+
+inline int read(){
+    int s = 0,w = 1;
+    char ch = getchar();
+    while (ch <= '0' || ch > '9')
+    {
+        if (ch == '-') w = -1;
+        ch = getchar();
+    }
+    while (ch >= '0' && ch <= '9')
+    {
+        s = s * 10 + ch - '0';
+        ch = getchar();
+    }
+    return s * w;
+}
+
+inline void write(int f)
+{
+    if (f < 0)
+    {
+        putchar('-');
+        f = -f;
+    }
+    if (f > 9) write(f / 10);
+    putchar(f % 10 + '0');
+}
+
+void add(int v)
+{
+    int cnt = 1;
+    while (v > 0)
+    {
+        z[cnt] += v % 10;
+        v /= 10;
+    }
+    return;
+}
+
+void min(int v)
+{
+    int cnt = 1;
+    while (v > 0)
+    {
+        z[cnt] -= v % 10;
+        v /= 10;
+    }
+    return;
+}
+
+void result()
+{
+    for (int i = 1; i <= m; ++ i)
+    {
+        z[i + 1] += z[i] / 10;
+        z[i] %= 10;
+    }
+    return;
+}
+
+void m_s(int l, int r)
+{
+    if(r - l > 1) {
+        int m = l + (r - l) / 2;
+        int p = l, q = m, i = l;
+        m_s(l, m);
+        m_s(m, r);
+        while(p < m || q < r)
+        {
+            if(q >= r || (p < m && x[p] <= x[q]))
+                y[i ++] = x[p ++];
+            else
+            {
+                y[i ++] = x[q ++];
+                add(m);
+                min(p);
+            }
+        }
+        for(i = l; i < r; ++ i)
+            x[i] = y[i];
+    }
+}
+
+int main()
+{
+    n = read();
+    for(int i = 1; i <= n; ++ i) x[i] = read();
+    m_s(1, n + 1);
+    while (-- m && z[m]) break;
+    m += 1;
+    result();
+    if (!z[m]) -- m;
+    for (int i = m; i >= 1; -- i) write(z[i]);
+    for (int i = MAX; i >= 1; -- i)
+    {
+        if (z[i]) judge = true;
+        if (judge) write(z[i]);
+    }
+    return 0;
+}
+*/
+
+/* digit triangle
+#include <cstdio>
+#include <cstring>
+#include <algorithm>
+#include <cctype>
+
+using namespace std;
+
+int n, sm, x[20], vis[20], re[20];
+
+inline int read()
+{
+    int res = 0;
+    char ch;
+    while (isspace(ch = getchar()));
+    do res = res * 10 + ch - '0'; while (isdigit(ch = getchar()));
+    return res;
+}
+
+inline void write(int n)
+{
+    if (n == 0) return;
+    write(n / 10);
+    putchar(n % 10 + '0');
+    return;
+}
+
+int dfs(int l, int m, int p)
+{
+    int i;
+    if (p > sm) return 0;
+    if (l == n)
+    {
+        if (p == sm)
+        {
+            x[l] = m;
+            return 1;
+        }
+        else return 0;
+    }
+    vis[m] = 1;
+    for (i = 1; i <= n; ++ i)
+    {
+        if (!vis[i] && dfs(l + 1, i, p + re[l] * i))
+        {
+            x[l] = m;
+            return 1;
+        }
+    }
+    vis[m] = 0;
+    return 0;
+}
+
+int main()
+{
+    n = read();
+    sm = read();
+    re[0] = re[n - 1] = 1;
+    int j;
+    if (n > 1)
+        for (j = 1; j * 2 < n; ++ j)
+            re[j] = re[n - 1 - j] = (n - j) * re[j - 1] / j;
+    if (dfs(0, 0, 0))
+    {
+        for (j = 1; j <= n; ++ j)
+        {
+            write(x[j]);
+            printf(" ");
+        }
+    }
+    return 0;
+}
